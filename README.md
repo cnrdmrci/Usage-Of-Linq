@@ -1,0 +1,2 @@
+# LinqNotes
+Linq Notları içermektedir.
