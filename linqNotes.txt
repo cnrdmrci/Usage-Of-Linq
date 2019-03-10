@@ -1,0 +1,266 @@
+	---Linq nedir?---
+Linq güçlü bir sorgulama dilidir. Farklı veri kaynaklarınından veri sorgulamak için C# vb. programlama dillerinde kullanılır. Açılımı LINQ (Language Integrated Query).
+
+Farklı veri kaynaklarından veri işlemleri için kullanılan tek satırlık sorgudur. C# ile entegre olarak çalışan LINQ veri tabanı ile C# yazılım dili arasındaki bağlantıyı kurar. Tek bir sorgulama ile veri tabanındaki veriler işleme alınır. SQL veritabanında ki veriler üzerindeki işlemleri LINQ ile yapılır. Kaydet, Güncelle, Filtrele vb. sorgular yazılması sağlanır.
+
+LINQ nesneler ile çalışabilme özelliğine sahiptir. SQL veritabanının yanında; Object, DataSet, Xml vb. veri sağlayıcıları ile sorgu yazılması mümkündür.
+
+LINQ'nun Avantajları
+
+Farklı veri kaynaklarında ki veriler için ortak kullanım
+Daha az kod
+Okunabilir Kod
+Farklı veri kaynaklarında ki ortak sorgulama standartı
+Derleme esnasında nesne verilerinin kontrolünün sağlanabilmesi
+Verileri farklı koleksiyonlara dönüştürme kolaylığı
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Elements---
+Linq ile tek kayıt getirmek içi ElementAt, ElementAtOrDefault, First, FirstOrDefault, Last, LastOrDefault, Single, SingleOrDefault metotları kullanılır.
+.First() -> koleksiyondaki ilk elemani döner. koleksiyon boş ise hata verecektir.
+.FirstOrDefault() -> koleksiyondaki ilk elemani döner. Eğer koleksiyon boş ise null döner.
+.ElementAt() -> anahtar sözcüğü bir koleksiyonda bulunan verilerin index değerine göre listelenmesini sağlanır.
+.ElementAtOrDefault() -> istenilen dizi numarasındaki eleman dizide yok ise sıfır döner.
+.Last() -> koleksiyondaki son elemani döner. Koleksiyon boş ise hata verecektir.
+.LastOrDefault() -> koleksiyondaki son elemani döner. Eğer koleksiyon boş ise null döner.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Aggregation---
+LINQ Sum - Koleksiyondaki tam sayıların toplar.
+LINQ Max - Koleksiyondaki en büyük sayısal elemanı bulur.
+LINQ Min - Koleksiyondaki en küçük sayısal elemanı bulur.
+LINQ Count - Koleksiyondaki eleman sayısını Int32 türünde verir.
+LINQ LongCount - Koleksiyondaki eleman sayısını Int64 türünde verir.
+LINQ Average - Koleksiyondaki sayısal değerlerin ortalamasını hesaplar.
+
+LINQ Aggregate - anahtar sözcüğü, koleksiyonda bulunan sayısal değerlere belirtilen  işleme göre hesaplanmasını sağlar. Toplama, çarpma vb. işlemler ile koleksiyonda bulunan bütün değerler aynı işleme tabi tutularak sonuç elde edilir.
+ *var numbers = new int[] {1, 2, 3, 4};
+ *var result = numbers.Aggregate((a, b) => a * b); //24
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Filtering---
+Linq ile filtreleme işlemleri için Where, OfType gibi linq metotları kullanılır.
+.Where() anahtar kelimesi sorgularda filtreleme için kullanılır.
+var result = from p in products
+             where p.Price > 3 && p.CategoryName == "Meyve"
+             select p.Name;
+var result = products.Where(x => x.Price >3 && x.CategoryName == "Meyve");
+
+.OfType() anahtar sözcüğü özel tipler ile dolu olan koleksiyondaki verilerin belirtilen tipte listelenmesi sağlar.
+object[] values = {"Turkey", "India", 5, 75, "China", 5.25};
+var result = values.OfType<int>(); //Sadece int tipindekiler yeni koleksiyona eklendi.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Quantifiers---
+Linq ile Koleksiyonlarda veri var mı kontrolü All, Any, Contains metotları ile yapılır ve bool olarak geriye döner. Kayıt var ise True, yok ise False döner.
+.Any() -> anahtar sözcüğü koleksiyonda bulunan verilerin olup olmadığını kontrol eder.
+.Contains() -> Tanımlanan int türündeki List'te değerin olup olmadığı kontrol edilir. Koşula uygun değer var ise True, yok ise False sonucu döner.
+.All() -> Koleksiyondaki tüm öğelerin belirtilen koşulu karşılayıp karşılamadığını kontrol eder.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Sorting---
+Linq ile sıralama işlemleri OrderBy, OrderByDescending, ThenBy, ThenByDescending, Reverse linq metotları ile yapılır.
+
+.OrderBy() anahtar sözcüğü bir koleksiyon öğelerinin artan yada azalan sıraya göre listenmesini sağlar. Varsayılan olarak Asceding 'dir(Artan sıraya göre). Öğelerin azalan sıraya göre listelenmesi için Descending anahtar sözcüğü kullanılır.
+
+.ThenBy() anahtar sözcüğü ile bir koleksiyon içerisinde çoklu sıralama yapılması için sağlanır.
+*Öncelikle koleksiyon OrderBy() yada OrderByDesceding() anahtar sözcüğü ile sıralanmalıdır. Bu sıralamanın ardından ThenBy() anahtar sözcüğü ile sıralama yapılır. ThenBy() anahtar sözcüğü içerisinden tanımlanan lambda sorgusuna göre artan olarak koleksiyon sıralanır.
+
+.OrderByDescending() anahtar sözcüğü koleksiyonda bulunan verilerin belirtilen parametrelerine göre azalan olarak listelenmesini sağlar.
+
+.ThenByDescending() anahtar sözcüğü içerisinden tanımlanan lambda sorgusuna göre azalan olarak koleksiyon sıralanır.
+
+.Reverse() anahtar sözcüğü ile dizide bulunan elemanları tersten sıralamak için kullanılır.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Grouping---
+Linq ile gruplama işlemlerinde GroupBy, ToLookup metotları kullanılır.
+
+.GroupBy() anahtar sözcüğü koleksiyondaki verilerin gruplanması için kullanılır.
+int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+            var groups = numbers.GroupBy(x => x % 2);
+            foreach (var group in groups)
+            {
+                Console.WriteLine("Group: {0}", group.Key);
+
+                foreach (var item in group) 
+                    Console.WriteLine("Group Item: {0}", item);
+            }
+
+.ToLookup() anahtar sözcüğü koleksiyonu indexlemeye izin veren yeni bir veri yapısı döndürür. 
+ToLookup anahtar sözcüğü ile dizide bulunan elemanların karakter uzunluğuna göre gruplanması örneği aşağıdaki gibidir. ToLookup ile dizideki elemanlar karakter uzunluğuna göre gruplanmıştır.  lookup[8] içerisinde bulunan sekiz rakamı ile sekiz olarak gruplanmış olan dizi elemanlarını getirir.
+string[] months = new[]
+            {
+                "February", "March", "May", "June", "July", "August", "September", "October", "November",
+                "December"
+            };
+
+            var lookup = months.ToLookup(item => item.Length);
+            foreach (string item in lookup[8])
+            {
+                Console.WriteLine("8 = " + item);
+            }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Projection---
+Linq ile koleksiyonlar da seçim işlemleri Select, SelectMany metotları ile yapılır.
+.Select()
+.SelectMany()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Set---
+.Distinct() anahtar sözcüğü koleksiyon içerisinde bulunan tekrarlayan kayıtların gösterilmesini engeller.
+string[] numbers = { "Monday", "Tuesday", "Tuesday", "Wednesday", "Thursday", "Thursday", "Sunday", "Saturday", "Saturday", "Saturday" };
+var result = numbers.Distinct();
+//Monday,Tuesday,Wednesday,Thursday,Sunday,Saturday
+
+.Union() anahtar sözcüğü iki koleksiyonda bulunan verilerin tekrarlayanları olmadan, koleksiyon verilerini geri döner.
+var days1 = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday","Friday"};
+var days2 = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Sunday", "Saturday" };
+var result = days1.Union(days2); //Monday,Tuesday,Wednesday,Thursday,Friday,Sunday,Saturday
+
+.Intersect() anahtar sözcüğü iki koleksiyonda bulunan tekrarlayan kayıtların listelenmesini sağlar.
+int[] numbers1 = { 5, 10, 20 };
+int[] numbers2 = { 20, 25, 30 };
+var result = numbers1.Intersect(numbers2); // 20
+
+.Except() Anahtar sözcüğü, iki koleksiyonda bulunan verilerin sadece ilk koleksiyonda olup ikinci koleksiyonda olmayan kayıtları listeler.
+string[] numbers1 = {"a", "b", "c", "d"};
+string[] numbers2 = {"c", "d", "e", "f"};
+var result = numbers1.Except(numbers2); // a,b
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Concatenation---
+Linq ile iki tane kolesiyonu birbirine bağlama için Concat metodu kullanılır.
+
+.Concat() anahtar sözcüğü iki tane koleksiyonun elemanlarını birleştirir. İlk koleksiyonun elemanlarından sonra ikinci koleksiyonun elemanları listelenecek şekilde yeni bir koleksiyon oluşur.
+string[] alphabet1 = {"A", "B", "C", "D"};
+string[] alphabet2 = {"E", "F", "G", "H"};
+var result = alphabet1.Concat(alphabet2);
+//A,B,C,D,E,F,G,H
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Conversion---
+Linq Conversion Metotları
+AsEnumerable -> Koleksiyonu IEnumerable olarak döndürür
+AsQueryable -> Koleksiyonu IQueryable olarak döndürür ve IEnumerable özellikleri özellikleri de bulunur.
+Cast -> Koleksiyonda bulunan veri türünü, yeni bir koleksiyonda belirlenen veri türüne dönüştürür.
+OfType -> Koleksiyonda bulunan belirli türdeki verileri yeni bir koleksiyon olarak döndürür.
+ToArray -> Koleksiyonu diziye dönüştürüri
+ToDictionary -> Koleksiyon öğelerini Key, Value olacak şekilde Dictionary'e dönüştürür.
+ToList -> Koleksiyonu List' e dönüştürür.
+ToLookup -> Koleksiyonu indexlemeye izin veren yeni bir veri yapısı döndürür. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Equality---
+Linq ile eşitlik kontrolü için Equality metodu kullanılır.
+.SequenceEqual() anahtar sözcüğü iki koleksiyonda bulunan öğelerin bir birine eşit olup olmamasını döner. Birinci koleksiyonun öğeleri, ikinci koleksiyonunu öğelerine eşit ise true değilse false döner.
+
+string[] words1 = { "February", "March", "May" };
+string[] words2 = { "February", "May", "March" };
+string[] words3 = { "February", "March", "May" };
+var result1 = words1.SequenceEqual(words2); //False
+var result2 = words1.SequenceEqual(words3); //True
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Joins---
+Linq ile koleksiyonları birleştirme işlemleri GroupJoin, Join metotları ile yapılır.
+.Join() anahtar kelimesi en az iki koleksiyonun birbirleri ile matche edilmesi için kullanılır. Oluşan matche sonucunda yeni bir koleksiyon oluşur.
+
+string[] numbers1 = {"One", "Two", "Three", "Four", "Five"};
+string[] numbers2 = { "One", "Two", "Three", "Eight", "Seven" };
+var result = numbers1.Join(numbers2,
+    num1 => num1,
+    num2 => num2,
+    (num1, num2) => num1);
+//One,Two,Three
+
+.GroupJoin() anahtar kelimesi iki koleksiyonda bulunan ortak alanlara göre eşleştirilerek birleştirir.
+var products = new Product[]
+            {
+                new Product {Id = 1, Name = "Leptops", Price = 10},
+                new Product {Id = 2, Name = "Tablests", Price = 25},
+                new Product {Id = 3, Name = "Desktops", Price = 45},
+                new Product {Id = 4, Name = "Monitors", Price = 30},
+                new Product {Id = 5, Name = "PC Games", Price = 150},
+            };
+
+
+            var countries = new Country[]
+            {
+                new Country {Id = 10, ProductId = 1, Name = "Turkey"},
+                new Country {Id = 20, ProductId = 2, Name = "Russian"},
+                new Country {Id = 30, ProductId = 3, Name = "India"},
+                new Country {Id = 40, ProductId = 4, Name = "Avusturalia"},
+                new Country {Id = 50, ProductId = 5, Name = "China"},
+            };
+var result = products.GroupJoin(countries, product => product.Id, country => country.ProductId,
+                (product, country) => new { ProductName = product.Name, country = country });
+
+foreach (var product in result)
+            {
+                Console.WriteLine(product.ProductName);
+                foreach (var item in product.country)
+                {
+                    Console.WriteLine(item.Id + " - " + item.Name);
+                }
+                Console.WriteLine("----------------------");
+            }
+
+Leptops
+10 - Turkey
+----------------------
+Tablests
+20 - Russian
+----------------------
+Desktops
+30 - India
+----------------------
+Monitors
+40 - Avusturalia
+----------------------
+PC Games
+50 - China
+----------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Partitioning---
+Linq ile koleksiyonda bulunan verileri Skip, SkipWhile, Take, TakeWhile metotları ile parçalanabilir.
+.Take() anahtar sözcüğü koleksiyon içerisinden listelenecek olan veri adedini belirtir. Sql Sorgu cümleciğinde Top() anahtar sözcüğüne eş değerdir.
+
+.Skip() anahtar sözcüğü koleksiyon içerisinde bulunan verilerin başlangıç index'ini belirler. Belirlenen index numarasından sonraki verileri getirir.
+string[] months =
+            {
+                "February", "March", "May", "June", "July", "August", "September", "October", "November",
+                "December"
+            };
+ar result = months.Skip(5);
+//August,September,October,November,December
+
+.TakeWhile() anahtar sözcüğü Koleksiyon da bulunan verilerin, belirlenen koşul neticesinde listelenmesini sağlar.
+TakeWhile stops when the condition is false, Where continues and find all elements matching the condition
+
+var intList = new int[] { 1, 2, 3, 4, 5, -1, -2 };
+Console.WriteLine("Where");
+foreach (var i in intList.Where(x => x <= 3))
+    Console.WriteLine(i);
+Console.WriteLine("TakeWhile");
+foreach (var i in intList.TakeWhile(x => x <= 3))
+    Console.WriteLine(i);
+//Given
+Where
+1,2,3,-1,-2
+TakeWhile
+1,2,3
+
+.SkipWhile() anahtar sözcüğü koleksiyonda bulunan verilerin, belirtilen koşul neticesinde başlangıç index'ine göre listelenmesini sağlar.
+var months = new List<string>
+            {
+                "February", "March", "May", "June", "July", "August", "September", "October", "November",
+                "December"
+            };
+var result = months.SkipWhile(x=> x.Length < 9);
+//September,October,November,December
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Other---
+.Zip() anahtar sözcüğü iki tane koleksiyonun index sıralamalarına göre birleştirilmesini sağlar.
+var array1 = new int[] { 10, 20, 30, 40, 50, 60};
+var array2 = new int[] { 5, 4, 8, 2, 7, 6 };
+var result = array1.Zip(array2, (x, y) => (x + y));
+//15,24,38,42,57,66
+
+	---IEnumerable---
+IEnumerable<T> genel bir interface'dir. IEnumerable koleksiyonları sorgulanabilir özelliğe sahiptir. Foreach ifadesi ile de döngü içerisinde verilerine erişilir. IEnumerable anahtar sözcüğü kendisini destekleyen tüm nesnelerden miras alan bir arabirimdir.
+
+Linq sorguları IEnumerable<T> yada IQueryable<T> olarak türetilir. Linq sorguları çalıştırıldığında Sıfır kayıt yada daha fazla kayıt listelenir. 
