@@ -100,6 +100,9 @@ string[] months = new[]
 Linq ile koleksiyonlar da seçim işlemleri Select, SelectMany metotları ile yapılır.
 .Select()
 .SelectMany()
+mylist = mylist.Where(n => n.Id == ID).Select(n => { n.Property = ""; return n; }).ToList();
+mylist = mylist.Select(n => { if (n.Id == ID) { n.Property = ""; } return n; }).ToList();
+var temp = mylist.Select(n => new { ID = n.Id, Name = n.Name}).toList();
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 	---Set---
 .Distinct() anahtar sözcüğü koleksiyon içerisinde bulunan tekrarlayan kayıtların gösterilmesini engeller.
