@@ -31,10 +31,10 @@ LINQ Count - Koleksiyondaki eleman sayısını Int32 türünde verir.
 LINQ LongCount - Koleksiyondaki eleman sayısını Int64 türünde verir.
 LINQ Average - Koleksiyondaki sayısal değerlerin ortalamasını hesaplar.
 
-LINQ Aggregate - anahtar sözcüğü, koleksiyonda bulunan sayısal değerlere belirtilen  işleme göre hesaplanmasını sağlar. Toplama, çarpma vb. işlemler ile koleksiyonda bulunan bütün değerler aynı işleme tabi tutularak sonuç elde edilir.
+LINQ Aggregate - anahtar sözcüğü, koleksiyonda bulunan değerlere belirtilen  işlemler yapılmasını sağlar.ile koleksiyonda bulunan bütün değerler aynı işleme tabi tutularak sonuç elde edilir.
  *var numbers = new int[] {1, 2, 3, 4};
  *var result = numbers.Aggregate((a, b) => a * b); //24
- var result = numbers.Aggregate((i,j) => i + "," + j)
+ var result = numbers.Aggregate((i,j) => i + "," + j)  //1,2,3,4
  var result = numbers.Select(i => i.item).Aggregate((i,j) => i + "," + j); // Eğer numbers bir class ise
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 	---Filtering---
