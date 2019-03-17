@@ -269,3 +269,29 @@ var result = array1.Zip(array2, (x, y) => (x + y));
 IEnumerable<T> genel bir interface'dir. IEnumerable koleksiyonları sorgulanabilir özelliğe sahiptir. Foreach ifadesi ile de döngü içerisinde verilerine erişilir. IEnumerable anahtar sözcüğü kendisini destekleyen tüm nesnelerden miras alan bir arabirimdir.
 
 Linq sorguları IEnumerable<T> yada IQueryable<T> olarak türetilir. Linq sorguları çalıştırıldığında Sıfır kayıt yada daha fazla kayıt listelenir. 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	---Linq Extension Method nasıl yazılır?---
+***Dictionary koleksiyonundan belirli bir veya birden çok kaydı sileceğimizi varsayalım.
+Aşağıdaki fonksiyon tek bir sözlük anahtar değeriyle bir kaydı siler.
+public static void KoleksiyonVeriSil<K, V>(this IDictionary<K, V> dict,Func<K,V,bool> match)
+{
+    var dicKey = dict.Keys.ToArray().Where(key => match(key, dict[key])).Select(n=>n).FirstOrDefault();
+    if(dicKey != null)
+	dict.Remove(dicKey);
+}
+Aşağıdaki fonksiyon koleksiyonun key değeri içindeki bir değeri kontrol eder. Birden fazla kaydı silmek için yazılmıştır.
+public static string SubeSil<K, V>(this IDictionary<K, V> dict, Func< V, bool> match)
+{
+    var list = dict.Keys.ToArray().Where(key => match(dict[key])).Select(n=>n);
+    foreach (var key in list)
+	dict.Remove(key);
+    if (list.Count() > 0)
+	return "Şube silindi.";
+    else
+	return "Şube bulunamadı.";
+}
+Yukarıdaki fonksiyonları temel alarak daha farklı fonksiyonlarda geliştirebiliriz.
+
+Aşağıda örnek kullanımlar mevcuttur.
+_ogretmenVeOgrenciVeriler.KoleksiyonVeriSil((key, value) => key == id); // Belirli bir id değerine sahip koleksiyon kaydını siler.
+_ogretmenVeOgrenciVeriler.SubeSil(value => value.OgrenciSube == sube); // Belirli şube numarasına dahil tüm kaydı siler.
