@@ -282,13 +282,14 @@ public static void KoleksiyonVeriSil<K, V>(this IDictionary<K, V> dict,Func<K,V,
 Aşağıdaki fonksiyon koleksiyonun key değeri içindeki bir değeri kontrol eder. Birden fazla kaydı silmek için yazılmıştır.
 public static string SubeSil<K, V>(this IDictionary<K, V> dict, Func< V, bool> match)
 {
+    string silinenIdler= "Silinen id numaraları : ";
     var list = dict.Keys.ToArray().Where(key => match(dict[key])).Select(n=>n);
     foreach (var key in list)
+    {
+	silinenIdler += dict.Where(x => x.Key.Equals(key)).Select(n => n.Key).FirstOrDefault() + ",";
 	dict.Remove(key);
-    if (list.Count() > 0)
-	return "Şube silindi.";
-    else
-	return "Şube bulunamadı.";
+    }
+    return silinenIdler;
 }
 Yukarıdaki fonksiyonları temel alarak daha farklı fonksiyonlarda geliştirebiliriz.
 
