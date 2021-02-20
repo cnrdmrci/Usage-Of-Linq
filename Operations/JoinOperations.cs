@@ -51,6 +51,93 @@ namespace Operations.Join
                                                 equalityComparer).ToList();
         }
 
-        
+        public void GroupJoin()
+        {
+            var groupjoin = _personList.GroupJoin(_itemList,
+                                                person => person.ItemId,
+                                                item => item.Id,
+                                                (person,items) => new { person, items } );
+        }
+
+        public IEnumerable<object> LeftOutherJoin()
+        {
+            var leftOutherJoin = _personList.GroupJoin(_itemList,
+                                                    person => person.ItemId,
+                                                    item => item.Id,
+                                                    (person,items) => new {Person = person, Items = items})
+                                            .SelectMany( x => x.Items.DefaultIfEmpty(),
+                                                            (x,y) => new { Person = x.Person, Item = y});
+
+            return leftOutherJoin;
+        }
+
+        public void LeftOutherJoinWithoutInner()
+        {
+            var leftOutherJoin = _personList.GroupJoin(_itemList,
+                                                    person => person.ItemId,
+                                                    item => item.Id,
+                                                    (person,items) => new {Person = person, Items = items})
+                                            .SelectMany( x => x.Items.DefaultIfEmpty(),
+                                                            (x,y) => new { Person = x.Person, Item = y})
+                                            .Where( x=> x.Item != null );
+        }
+
+        public IEnumerable<object> RightOutherJoin()
+        {
+            var rightOutherJoin = _itemList.GroupJoin(_personList,
+                                                    item => item.Id,
+                                                    person => person.ItemId,
+                                                    (item,persons) => new {Item = item, Persons = persons})
+                                            .SelectMany( x => x.Persons.DefaultIfEmpty(),
+                                                            (x,y) => new { Item = x.Item, Person = y});
+
+            return rightOutherJoin;
+        }
+
+        public void RightOutherJoinWithoutInner()
+        {
+            var rightOutherJoin = _itemList.GroupJoin(_personList,
+                                                    item => item.Id,
+                                                    person => person.ItemId,
+                                                    (item,persons) => new {Item = item, Persons = persons})
+                                            .SelectMany( x => x.Persons.DefaultIfEmpty(),
+                                                            (x,y) => new { Item = x.Item, Person = y})
+                                            .Where( x=> x.Person != null);
+        }
+
+        public void FullOutherJoin()
+        {
+            var leftJoin = LeftOutherJoin();
+
+            var rightJoin = RightOutherJoin();
+
+            var fulloutherJoin = leftJoin.Union(rightJoin);
+        }
+
+        public void FullOutherJoinWithoutInner()
+        {
+            var leftOutherJoin = _personList.GroupJoin(_itemList,
+                                                    person => person.ItemId,
+                                                    item => item.Id,
+                                                    (person,items) => new {Person = person, Items = items})
+                                            .SelectMany( x => x.Items.DefaultIfEmpty(),
+                                                            (x,y) => new { Person = x.Person, Item = y});
+
+            var rightOutherJoin = _itemList.GroupJoin(_personList,
+                                                    item => item.Id,
+                                                    person => person.ItemId,
+                                                    (item,persons) => new {Item = item, Persons = persons})
+                                            .SelectMany( x => x.Persons.DefaultIfEmpty(),
+                                                            (x,y) => new { Person = y, Item = x.Item});
+
+            var fullOutherJoin = rightOutherJoin.Union(leftOutherJoin);
+
+            var fullOutherJoinWithoutInner = fullOutherJoin.Where( x=> x.Item != null || x.Person != null);
+        }
+
+        public void CrossJoin()
+        {
+            var crossJoin = _personList.SelectMany( x => _itemList, (a,b) => new { a.Id, b.Name });
+        }
     }
 }

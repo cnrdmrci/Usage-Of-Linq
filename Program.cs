@@ -1,5 +1,6 @@
 ﻿using System;
 using Operations.Filtering;
+using Operations.Join;
 
 namespace LinqNotes
 {
@@ -7,8 +8,8 @@ namespace LinqNotes
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             FilteringOperations();
+            JoinOperations();
         }
 
         static void FilteringOperations()
@@ -16,6 +17,27 @@ namespace LinqNotes
             FilteringOperations filteringOperations = new FilteringOperations();
             filteringOperations.Where();
             filteringOperations.TypeOf();
+        }
+
+        static void JoinOperations()
+        {
+            JoinOperations joinOperations = new JoinOperations();
+            joinOperations.Join();
+            joinOperations.JoinWithEqualityComparer();
+
+            joinOperations.GroupJoin();
+
+            joinOperations.LeftOutherJoin();
+            joinOperations.LeftOutherJoinWithoutInner();
+
+            joinOperations.RightOutherJoin();
+            joinOperations.RightOutherJoinWithoutInner();
+
+            joinOperations.FullOutherJoin();
+            joinOperations.FullOutherJoinWithoutInner();
+
+            joinOperations.CrossJoin();
+
         }
     }
 }
