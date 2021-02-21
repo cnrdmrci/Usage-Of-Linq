@@ -1,6 +1,7 @@
 ﻿using System;
 using Operations.Filtering;
 using Operations.Join;
+using Operations.Projection;
 
 namespace LinqNotes
 {
@@ -10,6 +11,7 @@ namespace LinqNotes
         {
             FilteringOperations();
             JoinOperations();
+            ProjectionOperations();
         }
 
         static void FilteringOperations()
@@ -38,6 +40,13 @@ namespace LinqNotes
 
             joinOperations.CrossJoin();
 
+        }
+
+        static void ProjectionOperations()
+        {
+            ProjectionOperations projectionOperations = new ProjectionOperations();
+            projectionOperations.Select();
+            projectionOperations.SelectMany();
         }
     }
 }
