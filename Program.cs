@@ -2,6 +2,7 @@
 using Operations.Filtering;
 using Operations.Join;
 using Operations.Projection;
+using Operations.Shorting;
 
 namespace LinqNotes
 {
@@ -12,6 +13,7 @@ namespace LinqNotes
             FilteringOperations();
             JoinOperations();
             ProjectionOperations();
+            ShortingOperations();
         }
 
         static void FilteringOperations()
@@ -47,6 +49,16 @@ namespace LinqNotes
             ProjectionOperations projectionOperations = new ProjectionOperations();
             projectionOperations.Select();
             projectionOperations.SelectMany();
+        }
+
+        static void ShortingOperations()
+        {
+            ShortingOperations shortingOperations = new ShortingOperations();
+            shortingOperations.OrderBy();
+            shortingOperations.OrderByDescending();
+            shortingOperations.ThenBy();
+            shortingOperations.ThenByDescending();
+            shortingOperations.Reverse();
         }
     }
 }
