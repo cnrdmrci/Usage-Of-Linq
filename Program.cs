@@ -1,5 +1,6 @@
 ﻿using System;
 using Operations.Filtering;
+using Operations.Grouping;
 using Operations.Join;
 using Operations.Projection;
 using Operations.Shorting;
@@ -14,6 +15,7 @@ namespace LinqNotes
             JoinOperations();
             ProjectionOperations();
             ShortingOperations();
+            GroupingOperations();
         }
 
         static void FilteringOperations()
@@ -59,6 +61,13 @@ namespace LinqNotes
             shortingOperations.ThenBy();
             shortingOperations.ThenByDescending();
             shortingOperations.Reverse();
+        }
+    
+        static void GroupingOperations()
+        {
+            GroupingOperations groupingOperations = new GroupingOperations();
+            groupingOperations.GroupBy();
+            groupingOperations.ToLookUp();
         }
     }
 }
