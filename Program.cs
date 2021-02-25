@@ -1,4 +1,5 @@
 ﻿using System;
+using Operations.Conversions;
 using Operations.Filtering;
 using Operations.Grouping;
 using Operations.Join;
@@ -16,6 +17,7 @@ namespace LinqNotes
             ProjectionOperations();
             ShortingOperations();
             GroupingOperations();
+            ConversionOperations();
         }
 
         static void FilteringOperations()
@@ -68,6 +70,19 @@ namespace LinqNotes
             GroupingOperations groupingOperations = new GroupingOperations();
             groupingOperations.GroupBy();
             groupingOperations.ToLookUp();
+        }
+
+        static void ConversionOperations()
+        {
+            ConversionOperations conversionOperations = new ConversionOperations();
+            conversionOperations.AsEnumerable();
+            conversionOperations.AsQueryable();
+            conversionOperations.Cast();
+            conversionOperations.OfType();
+            conversionOperations.ToArray();
+            conversionOperations.ToDictionary();
+            conversionOperations.ToList();
+            conversionOperations.ToLookup();
         }
     }
 }
