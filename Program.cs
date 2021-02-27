@@ -1,4 +1,5 @@
 ﻿using System;
+using Operations.Aggregation;
 using Operations.Concatenation;
 using Operations.Conversions;
 using Operations.Filtering;
@@ -20,6 +21,7 @@ namespace LinqNotes
             GroupingOperations();
             ConversionOperations();
             ConcatenationOperations();
+            AggregationOperations();
         }
 
         static void FilteringOperations()
@@ -93,6 +95,17 @@ namespace LinqNotes
             concatenationOperations.Concat();
         }
 
-        
+        static void AggregationOperations()
+        {
+            AggregationOperations aggregationOperations = new AggregationOperations();
+            aggregationOperations.Aggregate();
+            aggregationOperations.Average();
+            aggregationOperations.Count();
+            aggregationOperations.LongCount();
+            aggregationOperations.Max();
+            aggregationOperations.Min();
+            aggregationOperations.Sum();
+        }
+
     }
 }
