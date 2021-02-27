@@ -1,4 +1,5 @@
 ﻿using System;
+using Operations.Concatenation;
 using Operations.Conversions;
 using Operations.Filtering;
 using Operations.Grouping;
@@ -18,6 +19,7 @@ namespace LinqNotes
             ShortingOperations();
             GroupingOperations();
             ConversionOperations();
+            ConcatenationOperations();
         }
 
         static void FilteringOperations()
@@ -84,5 +86,13 @@ namespace LinqNotes
             conversionOperations.ToList();
             conversionOperations.ToLookup();
         }
+
+        static void ConcatenationOperations()
+        {
+            ConcatenationOperations concatenationOperations = new ConcatenationOperations();
+            concatenationOperations.Concat();
+        }
+
+        
     }
 }
