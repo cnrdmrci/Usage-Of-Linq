@@ -79,7 +79,7 @@ namespace Operations.Join
                                                     (person,items) => new {Person = person, Items = items})
                                             .SelectMany( x => x.Items.DefaultIfEmpty(),
                                                             (x,y) => new { Person = x.Person, Item = y})
-                                            .Where( x=> x.Item != null );
+                                            .Where( x=> x.Item == null );
         }
 
         public IEnumerable<object> RightOutherJoin()
@@ -102,7 +102,7 @@ namespace Operations.Join
                                                     (item,persons) => new {Item = item, Persons = persons})
                                             .SelectMany( x => x.Persons.DefaultIfEmpty(),
                                                             (x,y) => new { Item = x.Item, Person = y})
-                                            .Where( x=> x.Person != null);
+                                            .Where( x=> x.Person == null);
         }
 
         public void FullOutherJoin()
@@ -132,7 +132,7 @@ namespace Operations.Join
 
             var fullOutherJoin = rightOutherJoin.Union(leftOutherJoin);
 
-            var fullOutherJoinWithoutInner = fullOutherJoin.Where( x=> x.Item != null || x.Person != null);
+            var fullOutherJoinWithoutInner = fullOutherJoin.Where( x=> x.Item == null || x.Person == null);
         }
 
         public void CrossJoin()
