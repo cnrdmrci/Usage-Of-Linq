@@ -2,6 +2,7 @@
 using Operations.Aggregation;
 using Operations.Concatenation;
 using Operations.Conversions;
+using Operations.Element;
 using Operations.Equality;
 using Operations.Filtering;
 using Operations.Grouping;
@@ -30,6 +31,7 @@ namespace LinqNotes
             PartitionOperators();
             EqualityOperations();
             SetOperations();
+            ElementOperators();
         }
 
         static void FilteringOperations()
@@ -145,6 +147,20 @@ namespace LinqNotes
             setOperations.Except();
             setOperations.Intersect();
             setOperations.Union();
+        }
+        
+        static void ElementOperators()
+        {
+            ElementOperators elementOperators = new ElementOperators();
+            elementOperators.ElementAt();
+            elementOperators.ElementAtOrDefault();
+            elementOperators.First();
+            elementOperators.FirstOrDefault();
+            elementOperators.Last();
+            elementOperators.LastOrDefault();
+            elementOperators.Single();
+            elementOperators.SingleOrDefault();
+            elementOperators.DefaultIfEmpty();
         }
 
     }
