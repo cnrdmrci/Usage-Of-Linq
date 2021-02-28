@@ -6,6 +6,7 @@ using Operations.Filtering;
 using Operations.Grouping;
 using Operations.Join;
 using Operations.Projection;
+using Operations.Quantifier;
 using Operations.Shorting;
 
 namespace LinqNotes
@@ -22,6 +23,7 @@ namespace LinqNotes
             ConversionOperations();
             ConcatenationOperations();
             AggregationOperations();
+            QuantifierOperations();
         }
 
         static void FilteringOperations()
@@ -105,6 +107,14 @@ namespace LinqNotes
             aggregationOperations.Max();
             aggregationOperations.Min();
             aggregationOperations.Sum();
+        }
+
+        static void QuantifierOperations()
+        {
+            QuantifierOperations quantifierOperations = new QuantifierOperations();
+            quantifierOperations.All();
+            quantifierOperations.Any();
+            quantifierOperations.Contains();
         }
 
     }
