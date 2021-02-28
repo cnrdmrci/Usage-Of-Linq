@@ -9,6 +9,7 @@ using Operations.Join;
 using Operations.Partition;
 using Operations.Projection;
 using Operations.Quantifier;
+using Operations.Set;
 using Operations.Shorting;
 
 namespace LinqNotes
@@ -28,6 +29,7 @@ namespace LinqNotes
             QuantifierOperations();
             PartitionOperators();
             EqualityOperations();
+            SetOperations();
         }
 
         static void FilteringOperations()
@@ -134,6 +136,15 @@ namespace LinqNotes
         {
             EqualityOperations equalityOperations = new EqualityOperations();
             equalityOperations.SequenceEqual();
+        }
+
+        static void SetOperations()
+        {
+            SetOperations setOperations = new SetOperations();
+            setOperations.Distinct();
+            setOperations.Except();
+            setOperations.Intersect();
+            setOperations.Union();
         }
 
     }
