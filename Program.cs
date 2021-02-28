@@ -2,6 +2,7 @@
 using Operations.Aggregation;
 using Operations.Concatenation;
 using Operations.Conversions;
+using Operations.Equality;
 using Operations.Filtering;
 using Operations.Grouping;
 using Operations.Join;
@@ -26,6 +27,7 @@ namespace LinqNotes
             AggregationOperations();
             QuantifierOperations();
             PartitionOperators();
+            EqualityOperations();
         }
 
         static void FilteringOperations()
@@ -126,6 +128,12 @@ namespace LinqNotes
             partitionOperators.SkipWhile();
             partitionOperators.Take();
             partitionOperators.TakeWhile();
+        }
+
+        static void EqualityOperations()
+        {
+            EqualityOperations equalityOperations = new EqualityOperations();
+            equalityOperations.SequenceEqual();
         }
 
     }
