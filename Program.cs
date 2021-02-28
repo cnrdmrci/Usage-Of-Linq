@@ -5,6 +5,7 @@ using Operations.Conversions;
 using Operations.Filtering;
 using Operations.Grouping;
 using Operations.Join;
+using Operations.Partition;
 using Operations.Projection;
 using Operations.Quantifier;
 using Operations.Shorting;
@@ -24,6 +25,7 @@ namespace LinqNotes
             ConcatenationOperations();
             AggregationOperations();
             QuantifierOperations();
+            PartitionOperators();
         }
 
         static void FilteringOperations()
@@ -115,6 +117,15 @@ namespace LinqNotes
             quantifierOperations.All();
             quantifierOperations.Any();
             quantifierOperations.Contains();
+        }
+
+        static void PartitionOperators()
+        {
+            PartitionOperators partitionOperators = new PartitionOperators();
+            partitionOperators.Skip();
+            partitionOperators.SkipWhile();
+            partitionOperators.Take();
+            partitionOperators.TakeWhile();
         }
 
     }
