@@ -12,6 +12,7 @@ using Operations.Projection;
 using Operations.Quantifier;
 using Operations.Set;
 using Operations.Shorting;
+using Operations.Generation;
 
 namespace LinqNotes
 {
@@ -32,6 +33,7 @@ namespace LinqNotes
             EqualityOperations();
             SetOperations();
             ElementOperators();
+            GenerationOperations();
         }
 
         static void FilteringOperations()
@@ -161,6 +163,15 @@ namespace LinqNotes
             elementOperators.Single();
             elementOperators.SingleOrDefault();
             elementOperators.DefaultIfEmpty();
+        }
+
+        static void GenerationOperations()
+        {
+            GenerationOperations generationOperations = new GenerationOperations();
+            generationOperations.DefaultIfEmpty();
+            generationOperations.Empty();
+            generationOperations.Range();
+            generationOperations.Repeat();
         }
 
     }
